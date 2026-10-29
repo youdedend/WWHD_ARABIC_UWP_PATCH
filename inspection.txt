@@ -1,12 +1,12 @@
 **********************
 PowerShell transcript start
-Start time: 20261029171442
+Start time: 20261029171534
 Username: runnervmdaln5\runneradmin
 RunAs User: runnervmdaln5\runneradmin
 Configuration Name: 
 Machine: runnervmdaln5 (Microsoft Windows NT 10.0.26100.0)
-Host Application: C:\Program Files\PowerShell\7\pwsh.dll -command . 'D:\a\_temp\2e9df00e-d079-4724-82dc-923ee5a2b51a.ps1'
-Process ID: 1368
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -command . 'D:\a\_temp\b4d2b479-be43-4d96-b8be-677f32d6f6f9.ps1'
+Process ID: 5808
 PSVersion: 7.6.7
 PSEdition: Core
 GitCommitId: 7.6.7
@@ -22,55 +22,123 @@ Transcript started, output file is D:\a\WWHD_ARABIC_UWP_PATCH\WWHD_ARABIC_UWP_PA
 Microsoft.VCLibs.x64.14.00.appx`t896581
 wwhd-uwp-0.1.4-x64.appx`t42650348
 === APPX files ===
-[Content_Types].xml`t610
-AppxBlockMap.xml`t4424
-AppxManifest.xml`t1266
-AppxSignature.p7x`t12210
-concrt140_app.dll`t300104
-logo.png`t426
-msvcp140_1_app.dll`t24304
-msvcp140_2_app.dll`t259424
-msvcp140_app.dll`t566072
-msvcp140_atomic_wait_app.dll`t38912
-msvcp140_codecvt_ids_app.dll`t21320
-vcamp140_app.dll`t394720
-vccorlib140_app.dll`t335320
-vcomp140_app.dll`t63648
-vcruntime140_1_app.dll`t37776
-vcruntime140_app.dll`t109136
-AppxMetadata\CodeIntegrity.cat`t14222
+[Content_Types].xml`t1284
+AppxBlockMap.xml`t123949
+AppxManifest.xml`t3460
+AppxSignature.p7x`t1618
+dxil.dll`t1509744
+dynamic-object-profile.txt`t6316
+EXTRACTOR-NOTICES.txt`t298
+glslang-LICENSE.txt`t54615
+LICENSE`t17098
+LLVM-LICENSE.txt`t15141
+Mesa-LICENSE.rst`t4026
+NOTICE.txt`t929
+preparation-profile.txt`t82
+prepare_game.py`t1555
+PYTHON-LICENSE.txt`t14215
+PYTHON-NOTICES.txt`t54851
+python311.zip`t2896736
+SDL-LICENSE.txt`t884
+SDL3.dll`t1820672
+vulkan_dzn.dll`t5981696
+wwhd-clang-bridge.dll`t71237632
+wwhd-python.dll`t5776896
+wwhd-uwp-game.exe`t12532224
+ZLIB-LICENSE.txt`t1024
+AppxMetadata\CodeIntegrity.cat`t2814
+Assets\SplashScreen.png`t20409
+Assets\Square150x150Logo.png`t8737
+Assets\Square44x44Logo.png`t1691
+Assets\StoreLogo.png`t2024
+Assets\Menu\connected.png`t552
+Assets\Menu\connected.svg`t239
+Assets\Menu\disc.png`t3070
+Assets\Menu\disc.svg`t639
+Assets\Menu\folder.png`t537
+Assets\Menu\folder.svg`t322
+Assets\Menu\Manrope-Bold.ttf`t97520
+Assets\Menu\Manrope-Medium.ttf`t97580
+Assets\Menu\Manrope-OFL.txt`t4387
+Assets\Menu\Manrope-Regular.ttf`t97500
+Assets\Menu\Manrope-SemiBold.ttf`t97616
+Assets\Menu\play.png`t629
+Assets\Menu\play.svg`t329
+Assets\Menu\SOURCES.md`t769
+CompilerHeaders\guest_addr.h`t4046
+CompilerHeaders\math.h`t287
+CompilerHeaders\ppc.h`t21184
+CompilerHeaders\recomp_table.h`t588
+CompilerHeaders\stdint.h`t558
+CompilerHeaders\stdio.h`t237
+CompilerHeaders\stdlib.h`t118
+CompilerHeaders\string.h`t263
+CompilerHeaders\verify_tap_gen.h`t3540
+CompilerHeaders\verify_tap.h`t2590
+CompilerHeaders\wwhd_guest_abi.h`t2650
+CompilerHeaders\wwhd_mod.h`t1681
+Tools\rpx.py`t3028
+Tools\recomp\analyze.py`t5722
+Tools\recomp\android_fixture.py`t5117
+Tools\recomp\builds.py`t8470
+Tools\recomp\crlive.py`t6945
+Tools\recomp\hooks_aspect.txt`t1105
+Tools\recomp\hooks_climb.txt`t749
+Tools\recomp\hooks_controller_selection.txt`t330
+Tools\recomp\hooks_glyphs.txt`t562
+Tools\recomp\hooks_gyro.txt`t198
+Tools\recomp\hooks_language.txt`t894
+Tools\recomp\hooks_mods.txt`t2310
+Tools\recomp\hooks_perf.txt`t279
+Tools\recomp\hooks_rtl.txt`t1269
+Tools\recomp\hooks_traversal.txt`t780
+Tools\recomp\hooks.txt`t11413
+Tools\recomp\leaflocal.py`t15246
+Tools\recomp\mkbuildmap.py`t12886
+Tools\recomp\ppc2c.py`t27980
+Tools\recomp\recomp.py`t30749
+Tools\recomp\stubgen.py`t5036
+Tools\recomp\write_map_fixture.py`t404
+Tools\recomp\builds\eu.json`t2954
 === APPX manifest ===
 <?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:build="http://schemas.microsoft.com/developer/appx/2015/build" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" IgnorableNamespaces="uap build mp">
-  <Identity Name="Microsoft.VCLibs.140.00" ProcessorArchitecture="x64" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="14.0.33519.0" />
-  <mp:PhoneIdentity PhoneProductId="938c94d3-76d8-49d2-8524-dd6e4581ff3a" PhonePublisherId="a8099e80-050d-411d-9b45-4ea107a7be6b" />
-  <Properties>
-    <Framework>true</Framework>
-    <DisplayName>Microsoft Visual C++ 2015 UWP Runtime Package</DisplayName>
-    <PublisherDisplayName>Microsoft Platform Extensions</PublisherDisplayName>
-    <Description>Microsoft Visual C++ 2015 UWP Runtime support for native applications</Description>
-    <Logo>logo.png</Logo>
-  </Properties>
-  <Resources>
-    <Resource Language="en-US" />
-  </Resources>
-  <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10042.0" MaxVersionTested="10.0.10042.0" />
-  </Dependencies>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+ xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+ xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+ IgnorableNamespaces="uap rescap">
+ <Identity Name="WWHDRecomp.UWP.Unified" Publisher="CN=WWHDRecompDevelopment" Version="0.1.4.0" ProcessorArchitecture="x64"/>
+ <Properties><DisplayName>WWHD UWP</DisplayName><PublisherDisplayName>WWHD UWP Development</PublisherDisplayName><Logo>Assets\StoreLogo.png</Logo></Properties>
+ <Dependencies><TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0"/>
+ <PackageDependency Name="Microsoft.VCLibs.140.00" MinVersion="14.0.33519.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"/></Dependencies>
+ <Resources><Resource Language="en-us"/></Resources>
+ <Applications><Application Id="App" Executable="wwhd-uwp-game.exe" EntryPoint="WWHD.Unified.App">
+ <uap:VisualElements DisplayName="WWHD UWP" Description="Prepare and play your own Wind Waker HD copy from USB or internal storage."
+ Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" BackgroundColor="#102838">
+ <uap:SplashScreen Image="Assets\SplashScreen.png"/></uap:VisualElements>
+ <Extensions><uap:Extension Category="windows.fileTypeAssociation"><uap:FileTypeAssociation Name="wwhd-game-data"><uap:SupportedFileTypes><uap:FileType>.aaf</uap:FileType><uap:FileType>.asn</uap:FileType><uap:FileType>.aw</uap:FileType><uap:FileType>.baglenv</uap:FileType><uap:FileType>.bdt</uap:FileType><uap:FileType>.bfma</uap:FileType><uap:FileType>.bfsar</uap:FileType><uap:FileType>.bfstm</uap:FileType><uap:FileType>.btsnd</uap:FileType><uap:FileType>.gsh</uap:FileType><uap:FileType>.h264</uap:FileType><uap:FileType>.pack</uap:FileType><uap:FileType>.rpx</uap:FileType><uap:FileType>.wux</uap:FileType><uap:FileType>.wud</uap:FileType><uap:FileType>.key</uap:FileType><uap:FileType>.c</uap:FileType><uap:FileType>.h</uap:FileType><uap:FileType>.obj</uap:FileType><uap:FileType>.json</uap:FileType><uap:FileType>.txt</uap:FileType><uap:FileType>.sarc</uap:FileType><uap:FileType>.sharcfb</uap:FileType><uap:FileType>.szs</uap:FileType><uap:FileType>.tga</uap:FileType><uap:FileType>.xml</uap:FileType><uap:FileType>.zip</uap:FileType><uap:FileType>.wwhdmod</uap:FileType><uap:FileType>.dds</uap:FileType><uap:FileType>.png</uap:FileType><uap:FileType>.jpg</uap:FileType><uap:FileType>.jpeg</uap:FileType><uap:FileType>.ini</uap:FileType><uap:FileType>.bin</uap:FileType><uap:FileType>.toml</uap:FileType><uap:FileType>.elf</uap:FileType><uap:FileType>.bfres</uap:FileType><uap:FileType>.sbfres</uap:FileType><uap:FileType>.bftex</uap:FileType><uap:FileType>.sbftex</uap:FileType><uap:FileType>.bflim</uap:FileType><uap:FileType>.bflyt</uap:FileType><uap:FileType>.bflan</uap:FileType><uap:FileType>.byml</uap:FileType><uap:FileType>.yaml</uap:FileType><uap:FileType>.yml</uap:FileType></uap:SupportedFileTypes></uap:FileTypeAssociation></uap:Extension></Extensions>
+ </Application></Applications>
+
+ <Capabilities>
+  <Capability Name="internetClient"/>
+  <Capability Name="codeGeneration"/>
+  <uap:Capability Name="removableStorage"/>
+  <rescap:Capability Name="extendedExecutionUnconstrained"/>
+ </Capabilities>
 </Package>
+
 **********************
 PowerShell transcript end
-End time: 20261029171443
+End time: 20261029171535
 **********************
 **********************
 PowerShell transcript start
-Start time: 20261029171444
+Start time: 20261029171536
 Username: runnervmdaln5\runneradmin
 RunAs User: runnervmdaln5\runneradmin
 Configuration Name: 
 Machine: runnervmdaln5 (Microsoft Windows NT 10.0.26100.0)
-Host Application: C:\Program Files\PowerShell\7\pwsh.dll -command . 'D:\a\_temp\2d904896-ec48-4cbc-ba27-57b05cc6090b.ps1'
-Process ID: 8328
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -command . 'D:\a\_temp\da7ff401-024f-4c13-909d-e6f7b07b8ecd.ps1'
+Process ID: 2636
 PSVersion: 7.6.7
 PSEdition: Core
 GitCommitId: 7.6.7
@@ -83,13 +151,20 @@ WSManStackVersion: 3.0
 **********************
 Transcript started, output file is D:\a\WWHD_ARABIC_UWP_PATCH\WWHD_ARABIC_UWP_PATCH\inspection.txt
 === Tool paths ===
-INFO: Could not find files for the given pattern(s).
-INFO: Could not find files for the given pattern(s).
-INFO: Could not find files for the given pattern(s).
-INFO: Could not find files for the given pattern(s).
+
+Name             Source
+----             ------
+cmake.exe        C:\Program Files\CMake\bin\cmake.exe
+ninja.exe        C:\ProgramData\Chocolatey\bin\ninja.exe
+clang-cl.exe     C:\Program Files\LLVM\bin\clang-cl.exe
+lld-link.exe     C:\Program Files\LLVM\bin\lld-link.exe
+llvm-readobj.exe C:\Program Files\LLVM\bin\llvm-readobj.exe
+llvm-lib.exe     C:\Program Files\LLVM\bin\llvm-lib.exe
 === Visual Studio ===
 
-=== Windows SDK ===
+C:\Program Files (x86)\Microsoft Visual Studio\Installer
+C:\Program Files (x86)\Microsoft Visual Studio\Shared
+=== Windows SDK tools ===
 C:\Program Files (x86)\Windows Kits\10\bin\10.0.14393.0
 C:\Program Files (x86)\Windows Kits\10\bin\10.0.15063.0
 C:\Program Files (x86)\Windows Kits\10\bin\10.0.16299.0
@@ -97,12 +172,16 @@ C:\Program Files (x86)\Windows Kits\10\bin\10.0.17134.0
 C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0
 C:\Program Files (x86)\Windows Kits\10\bin\x64
 C:\Program Files (x86)\Windows Kits\10\bin\x86
+C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\makeappx.exe
+C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\signtool.exe
+=== LLVM ===
 C:\Program Files\LLVM\bin\clang-cl.exe
 C:\Program Files\LLVM\bin\lld-link.exe
 C:\Program Files\LLVM\bin\llvm-dlltool.exe
 C:\Program Files\LLVM\bin\llvm-lib.exe
 C:\Program Files\LLVM\bin\llvm-readobj.exe
+
 **********************
 PowerShell transcript end
-End time: 20261029171446
+End time: 20261029171539
 **********************
