@@ -179,10 +179,11 @@ try {
     $source = Join-Path $WorkRoot 'source'
     $overlay = Join-Path $WorkRoot 'uwp-overlay'
     Invoke-Native 'git.exe' 'init' $source
+    Invoke-Native 'git.exe' '-C' $source 'config' 'core.autocrlf' 'false'
     Invoke-Native 'git.exe' '-C' $source 'remote' 'add' 'origin' 'https://github.com/ZeldaWWHDRecomp/ZeldaWWHDRecomp.git'
     Invoke-Native 'git.exe' '-C' $source 'fetch' '--depth' '1' 'origin' $baseCommit
     Invoke-Native 'git.exe' '-C' $source 'checkout' '--detach' 'FETCH_HEAD'
-    Invoke-Native 'git.exe' 'clone' '--depth' '1' '--branch' $uwpTag 'https://github.com/JYRS20/WWHD-UWP.git' $overlay
+    Invoke-Native 'git.exe' '-c' 'core.autocrlf=false' 'clone' '--depth' '1' '--branch' $uwpTag 'https://github.com/JYRS20/WWHD-UWP.git' $overlay
     Copy-RobocopyTree -Source $overlay -Destination $source
     Copy-Item -Path (Join-Path $repoRoot 'patch\*') -Destination $source -Recurse -Force
     Assert-Sha256 -Path (Join-Path $source 'runtime\src\rtl_text.cpp') -Expected $rtlSha256
@@ -241,7 +242,7 @@ try {
 
     Write-Host '=== Build the embedded Python host against the original Python DLL ==='
     $pythonSource = Join-Path $deps 'cpython'
-    Invoke-Native 'git.exe' 'clone' '--depth' '1' '--branch' 'v3.11.17' 'https://github.com/python/cpython.git' $pythonSource
+    Invoke-Native 'git.exe' '-c' 'core.autocrlf=false' 'clone' '--depth' '1' '--branch' 'v3.11.17' 'https://github.com/python/cpython.git' $pythonSource
     Invoke-Native 'git.exe' '-C' $pythonSource 'apply' (Join-Path $source 'platforms\uwp-python\patches\cpython-3.11.17-uwp.patch')
     $pythonHostObj = Join-Path $pythonBuild 'python_host.obj'
     $pythonHostLib = Join-Path $pythonBuild 'wwhd-python-host.lib'
