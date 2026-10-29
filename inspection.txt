@@ -1,0 +1,108 @@
+**********************
+PowerShell transcript start
+Start time: 20261029171442
+Username: runnervmdaln5\runneradmin
+RunAs User: runnervmdaln5\runneradmin
+Configuration Name: 
+Machine: runnervmdaln5 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -command . 'D:\a\_temp\2e9df00e-d079-4724-82dc-923ee5a2b51a.ps1'
+Process ID: 1368
+PSVersion: 7.6.7
+PSEdition: Core
+GitCommitId: 7.6.7
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is D:\a\WWHD_ARABIC_UWP_PATCH\WWHD_ARABIC_UWP_PATCH\inspection.txt
+=== Original release files ===
+Microsoft.VCLibs.x64.14.00.appx`t896581
+wwhd-uwp-0.1.4-x64.appx`t42650348
+=== APPX files ===
+[Content_Types].xml`t610
+AppxBlockMap.xml`t4424
+AppxManifest.xml`t1266
+AppxSignature.p7x`t12210
+concrt140_app.dll`t300104
+logo.png`t426
+msvcp140_1_app.dll`t24304
+msvcp140_2_app.dll`t259424
+msvcp140_app.dll`t566072
+msvcp140_atomic_wait_app.dll`t38912
+msvcp140_codecvt_ids_app.dll`t21320
+vcamp140_app.dll`t394720
+vccorlib140_app.dll`t335320
+vcomp140_app.dll`t63648
+vcruntime140_1_app.dll`t37776
+vcruntime140_app.dll`t109136
+AppxMetadata\CodeIntegrity.cat`t14222
+=== APPX manifest ===
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:build="http://schemas.microsoft.com/developer/appx/2015/build" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" IgnorableNamespaces="uap build mp">
+  <Identity Name="Microsoft.VCLibs.140.00" ProcessorArchitecture="x64" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="14.0.33519.0" />
+  <mp:PhoneIdentity PhoneProductId="938c94d3-76d8-49d2-8524-dd6e4581ff3a" PhonePublisherId="a8099e80-050d-411d-9b45-4ea107a7be6b" />
+  <Properties>
+    <Framework>true</Framework>
+    <DisplayName>Microsoft Visual C++ 2015 UWP Runtime Package</DisplayName>
+    <PublisherDisplayName>Microsoft Platform Extensions</PublisherDisplayName>
+    <Description>Microsoft Visual C++ 2015 UWP Runtime support for native applications</Description>
+    <Logo>logo.png</Logo>
+  </Properties>
+  <Resources>
+    <Resource Language="en-US" />
+  </Resources>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10042.0" MaxVersionTested="10.0.10042.0" />
+  </Dependencies>
+</Package>
+**********************
+PowerShell transcript end
+End time: 20261029171443
+**********************
+**********************
+PowerShell transcript start
+Start time: 20261029171444
+Username: runnervmdaln5\runneradmin
+RunAs User: runnervmdaln5\runneradmin
+Configuration Name: 
+Machine: runnervmdaln5 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -command . 'D:\a\_temp\2d904896-ec48-4cbc-ba27-57b05cc6090b.ps1'
+Process ID: 8328
+PSVersion: 7.6.7
+PSEdition: Core
+GitCommitId: 7.6.7
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is D:\a\WWHD_ARABIC_UWP_PATCH\WWHD_ARABIC_UWP_PATCH\inspection.txt
+=== Tool paths ===
+INFO: Could not find files for the given pattern(s).
+INFO: Could not find files for the given pattern(s).
+INFO: Could not find files for the given pattern(s).
+INFO: Could not find files for the given pattern(s).
+=== Visual Studio ===
+
+=== Windows SDK ===
+C:\Program Files (x86)\Windows Kits\10\bin\10.0.14393.0
+C:\Program Files (x86)\Windows Kits\10\bin\10.0.15063.0
+C:\Program Files (x86)\Windows Kits\10\bin\10.0.16299.0
+C:\Program Files (x86)\Windows Kits\10\bin\10.0.17134.0
+C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0
+C:\Program Files (x86)\Windows Kits\10\bin\x64
+C:\Program Files (x86)\Windows Kits\10\bin\x86
+C:\Program Files\LLVM\bin\clang-cl.exe
+C:\Program Files\LLVM\bin\lld-link.exe
+C:\Program Files\LLVM\bin\llvm-dlltool.exe
+C:\Program Files\LLVM\bin\llvm-lib.exe
+C:\Program Files\LLVM\bin\llvm-readobj.exe
+**********************
+PowerShell transcript end
+End time: 20261029171446
+**********************
