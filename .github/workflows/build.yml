@@ -1,0 +1,81 @@
+name: Build Arabic UWP
+
+on:
+  push:
+    branches:
+      - arena/50e1336b-wwhd-arabic-uwp-patch
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the verified ZIP as a GitHub release
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile, test, package and sign
+        shell: pwsh
+        run: pwsh -NoLogo -NoProfile -File scripts/Build-ArabicUwp.ps1
+
+      - name: Upload build artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wwhd-uwp-0.1.4-arabic-fix-x64
+          path: dist/wwhd-uwp-0.1.4-arabic-fix-x64.zip
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish GitHub release
+        if: success() && github.event_name == 'workflow_dispatch' && inputs.publish
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $zip = Get-Item 'dist/wwhd-uwp-0.1.4-arabic-fix-x64.zip'
+          $hash = (Get-FileHash -Algorithm SHA256 $zip.FullName).Hash.ToLowerInvariant()
+          $notes = @"
+          ## WWHD UWP 0.1.4 Arabic Fix
+
+          Newly compiled x64 UWP build based on [JYRS20/WWHD-UWP v0.1.4](https://github.com/JYRS20/WWHD-UWP/releases/tag/v0.1.4) and the supplied Arabic shaping fix.
+
+          The ZIP contains the signed APPX, its new self-signed certificate, the VCLibs dependency, installation notes, build provenance, and checksums.
+
+          ### Validation
+
+          - Arabic RTL/shaping regression test passed on Windows.
+          - Runtime compiled from the patched source with Clang and the Windows SDK.
+          - APPX packed with MakeAppx and signature-verified with SignTool.
+          - Xbox/in-game rendering was not tested by the build pipeline.
+
+          **ZIP SHA-256:** $hash
+
+          [View the build run]($env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID).
+          "@
+          [IO.File]::WriteAllText("$PWD/dist/RELEASE_NOTES.md", $notes)
+          gh release create 'v0.1.4-arabic-fix.1' $zip.FullName --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_REF_NAME --title 'WWHD UWP 0.1.4 Arabic Fix' --notes-file 'dist/RELEASE_NOTES.md' --latest
+          if ($LASTEXITCODE -ne 0) { throw 'GitHub release creation failed' }
+
+      - name: Save failure report to this branch
+        if: failure()
+        shell: pwsh
+        run: |
+          if (Test-Path 'build-report.txt') {
+            Get-Content 'build-report.txt' | Select-Object -Last 1500 | Set-Content 'build-failure.txt'
+          } else {
+            Set-Content 'build-failure.txt' 'The build failed before its report was created.'
+          }
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add build-failure.txt
+          git commit -m 'Record Arabic UWP build failure [skip ci]'
+          git push origin HEAD:arena/50e1336b-wwhd-arabic-uwp-patch
