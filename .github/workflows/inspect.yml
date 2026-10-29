@@ -6,6 +6,9 @@ on:
       - arena/50e1336b-wwhd-arabic-uwp-patch
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   inspect:
     runs-on: windows-latest
@@ -16,6 +19,7 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
+          Start-Transcript -Path (Join-Path $env:GITHUB_WORKSPACE 'inspection.txt') -Force
           $work = Join-Path $env:RUNNER_TEMP 'wwhd-inspect'
           New-Item -ItemType Directory -Force -Path $work | Out-Null
           $zip = Join-Path $work 'original.zip'
@@ -41,11 +45,13 @@ jobs:
           }
           Write-Host '=== APPX manifest ==='
           Get-Content (Join-Path $layout 'AppxManifest.xml')
+          Stop-Transcript
 
       - name: Inspect compiler and packaging tools
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Continue'
+          Start-Transcript -Path (Join-Path $env:GITHUB_WORKSPACE 'inspection.txt') -Append
           Write-Host '=== Tool paths ==='
           foreach ($tool in 'cmake.exe','ninja.exe','clang-cl.exe','lld-link.exe','llvm-readobj.exe','llvm-lib.exe','lib.exe','dumpbin.exe','makeappx.exe','signtool.exe') {
             & where.exe $tool 2>$null
@@ -55,3 +61,15 @@ jobs:
           Write-Host '=== Windows SDK ==='
           Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin" -Directory -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName
           Get-ChildItem 'C:\Program Files\LLVM\bin' -ErrorAction SilentlyContinue | Where-Object Name -Match 'clang-cl|lld-link|llvm-readobj|llvm-lib|llvm-dlltool' | Select-Object -ExpandProperty FullName
+          Stop-Transcript
+
+      - name: Save inspection report
+        shell: pwsh
+        if: always()
+        run: |
+          if (-not (Test-Path inspection.txt)) { throw 'Inspection report was not created' }
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add inspection.txt
+          git commit -m 'Record UWP build environment inspection [skip ci]'
+          git push origin HEAD:arena/50e1336b-wwhd-arabic-uwp-patch
