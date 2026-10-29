@@ -1,0 +1,149 @@
+**********************
+PowerShell transcript start
+Start time: 20261029172046
+Username: runnervmdaln5\runneradmin
+RunAs User: runnervmdaln5\runneradmin
+Configuration Name: 
+Machine: runnervmdaln5 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoLogo -NoProfile -File scripts/Build-ArabicUwp.ps1
+Process ID: 2516
+PSVersion: 7.6.7
+PSEdition: Core
+GitCommitId: 7.6.7
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Repository: D:\a\WWHD_ARABIC_UWP_PATCH\WWHD_ARABIC_UWP_PATCH
+Work directory: D:\a\_temp\wwhd-arabic-build
+Output directory: D:\a\WWHD_ARABIC_UWP_PATCH\WWHD_ARABIC_UWP_PATCH\dist
+=== Fetch and combine the pinned source trees ===
+> git.exe init D:\a\_temp\wwhd-arabic-build\source
+Initialized empty Git repository in D:/a/_temp/wwhd-arabic-build/source/.git/
+> git.exe -C D:\a\_temp\wwhd-arabic-build\source remote add origin https://github.com/ZeldaWWHDRecomp/ZeldaWWHDRecomp.git
+> git.exe -C D:\a\_temp\wwhd-arabic-build\source fetch --depth 1 origin f10b56621ed13e0053e7cf8190e740834377e45a
+From https://github.com/ZeldaWWHDRecomp/ZeldaWWHDRecomp
+ * branch            f10b56621ed13e0053e7cf8190e740834377e45a -> FETCH_HEAD
+> git.exe -C D:\a\_temp\wwhd-arabic-build\source checkout --detach FETCH_HEAD
+HEAD is now at f10b566 Changelog: v0.3.0
+> git.exe clone --depth 1 --branch v0.1.4 https://github.com/JYRS20/WWHD-UWP.git D:\a\_temp\wwhd-arabic-build\uwp-overlay
+Cloning into 'D:\a\_temp\wwhd-arabic-build\uwp-overlay'...
+Note: switching to '95a2b1b130fdf7572f1f3560b7299fec96b0a8bd'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+
+Verified SHA-256 49197efc35d296a45727ce584ed2e703e4c61b14303b551cc5ec1b3fc97917ea  D:\a\_temp\wwhd-arabic-build\source\runtime\src\rtl_text.cpp
+Verified SHA-256 a8365cf017e8d09c378402de66b3b574d994746590f3da5196661b081c966738  D:\a\_temp\wwhd-arabic-build\source\runtime\tools\rtl_text_test.cpp
+=== Download and unpack the original signed release ===
+Verified SHA-256 dc2855025e85d8019ba072621b63175e6f5b800f1c6f617f98cee00b13974dbb  D:\a\_temp\wwhd-arabic-build\downloads\wwhd-uwp-0.1.4-x64.zip
+Original executable SHA-256: df030a5add38251332f64c4582197be321f4a1ff82a08ecd90eff16a33b51245
+=== Initialize the Windows C++ toolchain ===
+Importing Visual Studio environment from C:\Program Files\Microsoft Visual Studio\18\Enterprise\Common7\Tools\VsDevCmd.bat
+VCToolsInstallDir=C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Tools\MSVC\14.51.36231\
+WindowsSdkDir=C:\Program Files (x86)\Windows Kits\10\
+> C:\Program Files\LLVM\bin\clang-cl.exe --version
+clang version 20.1.8
+Target: x86_64-pc-windows-msvc
+Thread model: posix
+InstalledDir: C:\Program Files\LLVM\bin
+=== Generate import libraries for the unchanged packaged DLLs ===
+> C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Tools\MSVC\14.51.36231\bin\HostX64\x64\lib.exe /nologo /def:D:\a\_temp\wwhd-arabic-build\imports\sdl\SDL3.def /machine:x64 /out:D:\a\_temp\wwhd-arabic-build\imports\sdl\SDL3.lib
+   Creating library D:\a\_temp\wwhd-arabic-build\imports\sdl\SDL3.lib and object D:\a\_temp\wwhd-arabic-build\imports\sdl\SDL3.exp
+Generated D:\a\_temp\wwhd-arabic-build\imports\sdl\SDL3.lib from 1274 exports
+> C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Tools\MSVC\14.51.36231\bin\HostX64\x64\lib.exe /nologo /def:D:\a\_temp\wwhd-arabic-build\imports\clang\lib\wwhd-clang-bridge.def /machine:x64 /out:D:\a\_temp\wwhd-arabic-build\imports\clang\lib\wwhd-clang-bridge.lib
+   Creating library D:\a\_temp\wwhd-arabic-build\imports\clang\lib\wwhd-clang-bridge.lib and object D:\a\_temp\wwhd-arabic-build\imports\clang\lib\wwhd-clang-bridge.exp
+Generated D:\a\_temp\wwhd-arabic-build\imports\clang\lib\wwhd-clang-bridge.lib from 8 exports
+> C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Tools\MSVC\14.51.36231\bin\HostX64\x64\lib.exe /nologo /def:D:\a\_temp\wwhd-arabic-build\imports\python\python311.def /machine:x64 /out:D:\a\_temp\wwhd-arabic-build\imports\python\python311.lib
+   Creating library D:\a\_temp\wwhd-arabic-build\imports\python\python311.lib and object D:\a\_temp\wwhd-arabic-build\imports\python\python311.exp
+Generated D:\a\_temp\wwhd-arabic-build\imports\python\python311.lib from 1631 exports
+=== Fetch the pinned public build dependencies ===
+Downloading https://github.com/libsdl-org/SDL/releases/download/release-3.4.18/SDL3-3.4.18.tar.gz
+Verified SHA-256 9c75cf16330322c217dedd2e0609f1124f1b54b8633e763467b4684d0f4334a3  D:\a\_temp\wwhd-arabic-build\downloads\SDL3-3.4.18.tar.gz
+> tar.exe -xzf D:\a\_temp\wwhd-arabic-build\downloads\SDL3-3.4.18.tar.gz -C D:\a\_temp\wwhd-arabic-build\downloads\SDL3-3.4.18.tar-extract
+Downloading https://github.com/KhronosGroup/Vulkan-Headers/archive/refs/tags/v1.4.363.tar.gz
+Verified SHA-256 cbaf687d3c59b9666fe080e7f8396b6b4f4d344a768ee6b337c59852f4526b68  D:\a\_temp\wwhd-arabic-build\downloads\v1.4.363.tar.gz
+> tar.exe -xzf D:\a\_temp\wwhd-arabic-build\downloads\v1.4.363.tar.gz -C D:\a\_temp\wwhd-arabic-build\downloads\v1.4.363.tar-extract
+Downloading https://github.com/KhronosGroup/glslang/archive/refs/tags/16.0.0.tar.gz
+Verified SHA-256 172385478520335147d3b03a1587424af0935398184095f24beab128a254ecc7  D:\a\_temp\wwhd-arabic-build\downloads\16.0.0.tar.gz
+> tar.exe -xzf D:\a\_temp\wwhd-arabic-build\downloads\16.0.0.tar.gz -C D:\a\_temp\wwhd-arabic-build\downloads\16.0.0.tar-extract
+Downloading https://github.com/madler/zlib/archive/refs/tags/v1.3.1.tar.gz
+Verified SHA-256 17e88863f3600672ab49182f217281b6fc4d3c762bde361935e436a95214d05c  D:\a\_temp\wwhd-arabic-build\downloads\v1.3.1.tar.gz
+> tar.exe -xzf D:\a\_temp\wwhd-arabic-build\downloads\v1.3.1.tar.gz -C D:\a\_temp\wwhd-arabic-build\downloads\v1.3.1.tar-extract
+=== Build the embedded Python host against the original Python DLL ===
+> git.exe clone --depth 1 --branch v3.11.17 https://github.com/python/cpython.git D:\a\_temp\wwhd-arabic-build\deps\cpython
+Cloning into 'D:\a\_temp\wwhd-arabic-build\deps\cpython'...
+warning: refs/tags/v3.11.17 8e4c525dc9bcd1885bbf06f72c611124a7d26713 is not a commit!
+Note: switching to 'e6392eb68a39cef49c9fe6431253050caa17a426'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+Updating files:  72% (3393/4700)
+Updating files:  73% (3431/4700)
+Updating files:  74% (3478/4700)
+Updating files:  75% (3525/4700)
+Updating files:  76% (3572/4700)
+Updating files:  77% (3619/4700)
+Updating files:  78% (3666/4700)
+Updating files:  79% (3713/4700)
+Updating files:  80% (3760/4700)
+Updating files:  81% (3807/4700)
+Updating files:  82% (3854/4700)
+Updating files:  83% (3901/4700)
+Updating files:  84% (3948/4700)
+Updating files:  85% (3995/4700)
+Updating files:  86% (4042/4700)
+Updating files:  87% (4089/4700)
+Updating files:  88% (4136/4700)
+Updating files:  89% (4183/4700)
+Updating files:  90% (4230/4700)
+Updating files:  91% (4277/4700)
+Updating files:  92% (4324/4700)
+Updating files:  93% (4371/4700)
+Updating files:  94% (4418/4700)
+Updating files:  95% (4465/4700)
+Updating files:  96% (4512/4700)
+Updating files:  97% (4559/4700)
+Updating files:  98% (4606/4700)
+Updating files:  99% (4653/4700)
+Updating files: 100% (4700/4700)
+Updating files: 100% (4700/4700), done.
+> git.exe -C D:\a\_temp\wwhd-arabic-build\deps\cpython apply D:\a\_temp\wwhd-arabic-build\source\platforms\uwp-python\patches\cpython-3.11.17-uwp.patch
+error: corrupt patch at D:/a/_temp/wwhd-arabic-build/source/platforms/uwp-python/patches/cpython-3.11.17-uwp.patch:5
+PS>TerminatingError(): "git.exe failed with exit code 128"
+BUILD FAILED: System.Management.Automation.RuntimeException: git.exe failed with exit code 128
+at Invoke-Native, D:\a\WWHD_ARABIC_UWP_PATCH\WWHD_ARABIC_UWP_PATCH\scripts\Build-ArabicUwp.ps1: line 22
+at <ScriptBlock>, D:\a\WWHD_ARABIC_UWP_PATCH\WWHD_ARABIC_UWP_PATCH\scripts\Build-ArabicUwp.ps1: line 245
+**********************
+PowerShell transcript end
+End time: 20261029172112
+**********************
