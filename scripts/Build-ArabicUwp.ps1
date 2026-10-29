@@ -339,15 +339,13 @@ try {
         if ($LASTEXITCODE -ne 0) {
             throw 'SignTool could not sign the APPX'
         }
-        Import-Certificate -FilePath $cer -CertStoreLocation 'Cert:\CurrentUser\Root' | Out-Null
-        Invoke-Native $signTool 'verify' '/pa' '/v' $appxOut
+        Invoke-Native $signTool 'verify' '/pa' '/v' '/r' 'WWHDRecompDevelopment' $appxOut
     } finally {
         if (Test-Path $pfx) {
             Remove-Item $pfx -Force
         }
         if ($cert) {
             Remove-Item (Join-Path 'Cert:\CurrentUser\My' $cert.Thumbprint) -Force -ErrorAction SilentlyContinue
-            Remove-Item (Join-Path 'Cert:\CurrentUser\Root' $cert.Thumbprint) -Force -ErrorAction SilentlyContinue
         }
         $passwordText = $null
         $password = $null

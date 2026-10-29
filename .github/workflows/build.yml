@@ -1,6 +1,9 @@
 name: Build Arabic UWP
 
 on:
+  push:
+    branches:
+      - arena/50e1336b-wwhd-arabic-uwp-patch
   workflow_dispatch:
     inputs:
       publish:
@@ -14,7 +17,7 @@ permissions:
 jobs:
   build:
     runs-on: windows-latest
-    timeout-minutes: 180
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 
