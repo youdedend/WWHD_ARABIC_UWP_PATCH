@@ -1,9 +1,6 @@
 name: Build Arabic UWP
 
 on:
-  push:
-    branches:
-      - arena/50e1336b-wwhd-arabic-uwp-patch
   workflow_dispatch:
     inputs:
       publish:
@@ -35,7 +32,7 @@ jobs:
           retention-days: 30
 
       - name: Publish GitHub release
-        if: success() && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish))
+        if: success() && github.event_name == 'workflow_dispatch' && inputs.publish
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
