@@ -1,0 +1,57 @@
+name: Inspect UWP release
+
+on:
+  push:
+    branches:
+      - arena/50e1336b-wwhd-arabic-uwp-patch
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download and inspect original APPX
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $work = Join-Path $env:RUNNER_TEMP 'wwhd-inspect'
+          New-Item -ItemType Directory -Force -Path $work | Out-Null
+          $zip = Join-Path $work 'original.zip'
+          Invoke-WebRequest -Uri 'https://github.com/JYRS20/WWHD-UWP/releases/download/v0.1.4/wwhd-uwp-0.1.4-x64.zip' -OutFile $zip
+          $hash = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLowerInvariant()
+          if ($hash -ne 'dc2855025e85d8019ba072621b63175e6f5b800f1c6f617f98cee00b13974dbb') {
+            throw "Unexpected original release SHA-256: $hash"
+          }
+          $release = Join-Path $work 'release'
+          Expand-Archive -Path $zip -DestinationPath $release
+          Write-Host '=== Original release files ==='
+          Get-ChildItem $release -Recurse -File | ForEach-Object {
+            '{0}`t{1}' -f $_.FullName.Substring($release.Length + 1), $_.Length
+          }
+          $appx = Get-ChildItem $release -Recurse -Filter *.appx | Select-Object -First 1
+          if (-not $appx) { throw 'No APPX found in original release' }
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $layout = Join-Path $work 'layout'
+          [IO.Compression.ZipFile]::ExtractToDirectory($appx.FullName, $layout)
+          Write-Host '=== APPX files ==='
+          Get-ChildItem $layout -Recurse -File | ForEach-Object {
+            '{0}`t{1}' -f $_.FullName.Substring($layout.Length + 1), $_.Length
+          }
+          Write-Host '=== APPX manifest ==='
+          Get-Content (Join-Path $layout 'AppxManifest.xml')
+
+      - name: Inspect compiler and packaging tools
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Continue'
+          Write-Host '=== Tool paths ==='
+          foreach ($tool in 'cmake.exe','ninja.exe','clang-cl.exe','lld-link.exe','llvm-readobj.exe','llvm-lib.exe','lib.exe','dumpbin.exe','makeappx.exe','signtool.exe') {
+            & where.exe $tool 2>$null
+          }
+          Write-Host '=== Visual Studio ==='
+          & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+          Write-Host '=== Windows SDK ==='
+          Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin" -Directory -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName
+          Get-ChildItem 'C:\Program Files\LLVM\bin' -ErrorAction SilentlyContinue | Where-Object Name -Match 'clang-cl|lld-link|llvm-readobj|llvm-lib|llvm-dlltool' | Select-Object -ExpandProperty FullName
