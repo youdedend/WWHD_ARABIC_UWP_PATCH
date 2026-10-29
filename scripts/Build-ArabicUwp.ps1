@@ -233,8 +233,13 @@ try {
     Write-Host '=== Fetch the pinned public build dependencies ==='
     $deps = Join-Path $WorkRoot 'deps'
     $sdlSource = Join-Path $deps 'SDL'
+    $sdlCommit = '37ee4ec4f4427e45dab91d1b40a5d075cb7ae255'
+    Invoke-Native 'git.exe' 'init' $sdlSource
+    Invoke-Native 'git.exe' '-C' $sdlSource 'config' 'core.autocrlf' 'false'
+    Invoke-Native 'git.exe' '-C' $sdlSource 'remote' 'add' 'origin' 'https://github.com/rodrigoandrigo/SDL3_UWP.git'
+    Invoke-Native 'git.exe' '-C' $sdlSource 'fetch' '--depth' '1' 'origin' $sdlCommit
+    Invoke-Native 'git.exe' '-C' $sdlSource 'checkout' '--detach' 'FETCH_HEAD'
     $vulkanSource = Join-Path $deps 'Vulkan-Headers'
-    Get-SourceArchive -Url 'https://github.com/libsdl-org/SDL/releases/download/release-3.4.18/SDL3-3.4.18.tar.gz' -Sha256 '9c75cf16330322c217dedd2e0609f1124f1b54b8633e763467b4684d0f4334a3' -Destination $sdlSource -DownloadDirectory $downloads
     Get-SourceArchive -Url 'https://github.com/KhronosGroup/Vulkan-Headers/archive/refs/tags/v1.4.363.tar.gz' -Sha256 'cbaf687d3c59b9666fe080e7f8396b6b4f4d344a768ee6b337c59852f4526b68' -Destination $vulkanSource -DownloadDirectory $downloads
     $hostDeps = Join-Path $source '.local\host-tools\_deps'
     Get-SourceArchive -Url 'https://github.com/KhronosGroup/glslang/archive/refs/tags/16.0.0.tar.gz' -Sha256 '172385478520335147d3b03a1587424af0935398184095f24beab128a254ecc7' -Destination (Join-Path $hostDeps 'glslang-src') -DownloadDirectory $downloads
@@ -387,6 +392,7 @@ See `ARABIC_FIX_NOTES.md`, `BUILD-INFO.txt`, and `SHA256SUMS.txt` for details.
         "Workflow run: $env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID",
         "Base source: https://github.com/ZeldaWWHDRecomp/ZeldaWWHDRecomp/commit/$baseCommit",
         "UWP overlay: https://github.com/JYRS20/WWHD-UWP/releases/tag/$uwpTag",
+        "SDL UWP headers: https://github.com/rodrigoandrigo/SDL3_UWP/commit/$sdlCommit",
         "Original release ZIP SHA-256: $originalSha256",
         "Patched rtl_text.cpp SHA-256: $rtlSha256",
         "Patched rtl_text_test.cpp SHA-256: $rtlTestSha256",
