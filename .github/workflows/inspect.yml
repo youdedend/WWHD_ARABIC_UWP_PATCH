@@ -34,8 +34,8 @@ jobs:
           Get-ChildItem $release -Recurse -File | ForEach-Object {
             '{0}`t{1}' -f $_.FullName.Substring($release.Length + 1), $_.Length
           }
-          $appx = Get-ChildItem $release -Recurse -Filter *.appx | Select-Object -First 1
-          if (-not $appx) { throw 'No APPX found in original release' }
+          $appx = Get-ChildItem $release -Recurse -Filter 'wwhd-uwp-*.appx' | Select-Object -First 1
+          if (-not $appx) { throw 'No game APPX found in original release' }
           Add-Type -AssemblyName System.IO.Compression.FileSystem
           $layout = Join-Path $work 'layout'
           [IO.Compression.ZipFile]::ExtractToDirectory($appx.FullName, $layout)
@@ -53,14 +53,19 @@ jobs:
           $ErrorActionPreference = 'Continue'
           Start-Transcript -Path (Join-Path $env:GITHUB_WORKSPACE 'inspection.txt') -Append
           Write-Host '=== Tool paths ==='
-          foreach ($tool in 'cmake.exe','ninja.exe','clang-cl.exe','lld-link.exe','llvm-readobj.exe','llvm-lib.exe','lib.exe','dumpbin.exe','makeappx.exe','signtool.exe') {
-            & where.exe $tool 2>$null
-          }
+          Get-Command cmake,ninja,clang-cl,lld-link,llvm-readobj,llvm-lib,lib,dumpbin,makeappx,signtool -ErrorAction SilentlyContinue |
+            Select-Object Name,Source | Format-Table -AutoSize | Out-String -Width 300 | Write-Host
           Write-Host '=== Visual Studio ==='
-          & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
-          Write-Host '=== Windows SDK ==='
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          & $vswhere -latest -products * -property installationPath
+          Get-ChildItem "${env:ProgramFiles(x86)}\Microsoft Visual Studio" -Directory -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName
+          Write-Host '=== Windows SDK tools ==='
           Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin" -Directory -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName
+          Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin\10.0.26100.0\x64" -Filter '*.exe' -ErrorAction SilentlyContinue |
+            Where-Object Name -Match 'makeappx|signtool' | Select-Object -ExpandProperty FullName
+          Write-Host '=== LLVM ==='
           Get-ChildItem 'C:\Program Files\LLVM\bin' -ErrorAction SilentlyContinue | Where-Object Name -Match 'clang-cl|lld-link|llvm-readobj|llvm-lib|llvm-dlltool' | Select-Object -ExpandProperty FullName
+          & 'C:\Program Files\LLVM\bin\clang-cl.exe' --version
           Stop-Transcript
 
       - name: Save inspection report
