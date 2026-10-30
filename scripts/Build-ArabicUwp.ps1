@@ -174,6 +174,8 @@ try {
     $originalSha256 = 'dc2855025e85d8019ba072621b63175e6f5b800f1c6f617f98cee00b13974dbb'
     $rtlSha256 = '49197efc35d296a45727ce584ed2e703e4c61b14303b551cc5ec1b3fc97917ea'
     $rtlTestSha256 = 'a8365cf017e8d09c378402de66b3b574d994746590f3da5196661b081c966738'
+    $surfacesSha256 = '91e55aca69e4b80699a5b1d5f9eb6e5cb5c118c60b58eb2bbf3a969d2ce8b416'
+    $rtlHooksSha256 = 'ebc1a0b25b5287d406965599e26b341c6e386bc7b38d4bd217e2a392220cb97a'
 
     Write-Host '=== Fetch and combine the pinned source trees ==='
     $source = Join-Path $WorkRoot 'source'
@@ -188,6 +190,8 @@ try {
     Copy-Item -Path (Join-Path $repoRoot 'patch\*') -Destination $source -Recurse -Force
     Assert-Sha256 -Path (Join-Path $source 'runtime\src\rtl_text.cpp') -Expected $rtlSha256
     Assert-Sha256 -Path (Join-Path $source 'runtime\tools\rtl_text_test.cpp') -Expected $rtlTestSha256
+    Assert-Sha256 -Path (Join-Path $source 'runtime\src\gfx\vulkan\surfaces.cpp') -Expected $surfacesSha256
+    Assert-Sha256 -Path (Join-Path $source 'runtime\src\rtl_text_hooks.cpp') -Expected $rtlHooksSha256
 
     Write-Host '=== Download and unpack the original signed release ==='
     $originalZip = Join-Path $downloads 'wwhd-uwp-0.1.4-x64.zip'
@@ -310,12 +314,12 @@ try {
     if (-not $manifest.Contains('Version="0.1.4.0"')) {
         throw 'The original APPX manifest version was not 0.1.4.0'
     }
-    $manifest = $manifest.Replace('Version="0.1.4.0"', 'Version="0.1.4.1"')
+    $manifest = $manifest.Replace('Version="0.1.4.0"', 'Version="0.1.4.2"')
     $manifest = $manifest.Replace('<DisplayName>WWHD UWP</DisplayName>', '<DisplayName>WWHD UWP Arabic Fix</DisplayName>')
     [IO.File]::WriteAllText($manifestPath, $manifest, [Text.UTF8Encoding]::new($false))
     $packageDir = Join-Path $OutputDirectory 'package'
     New-Item -ItemType Directory -Path $packageDir -Force | Out-Null
-    $appxOut = Join-Path $packageDir 'wwhd-uwp-0.1.4.1-arabic-fix-x64.appx'
+    $appxOut = Join-Path $packageDir 'wwhd-uwp-0.1.4.2-arabic-fix-x64.appx'
     $sdkRoot = "${env:ProgramFiles(x86)}\Windows Kits\10\bin"
     $sdk = Get-ChildItem $sdkRoot -Directory | Where-Object { $_.Name -match '^10\.0\.\d+\.\d+$' } | Sort-Object { [version]$_.Name } -Descending | Select-Object -First 1
     if (-not $sdk) {
@@ -363,13 +367,13 @@ try {
     $readme = @'
 # WWHD UWP 0.1.4 Arabic Fix
 
-This package contains a newly compiled x64 UWP runtime using JYRS20/WWHD-UWP v0.1.4 and the supplied Arabic shaping fix.
+This package contains a newly compiled x64 UWP runtime using JYRS20/WWHD-UWP v0.1.4 and the supplied Arabic text fixes and diagnostics.
 
 ## Install
 
 1. Install `Microsoft.VCLibs.x64.14.00.appx` if your Xbox does not already have this dependency.
 2. If Device Portal requests the signing certificate, install `WWHD-Arabic-Fix.cer` as a trusted developer/root certificate. This build uses a new self-signed certificate; it is not signed by the original author.
-3. Install `wwhd-uwp-0.1.4.1-arabic-fix-x64.appx` through Xbox Device Portal and set the application type to **Game** in Dev Home.
+3. Install `wwhd-uwp-0.1.4.2-arabic-fix-x64.appx` through Xbox Device Portal and set the application type to **Game** in Dev Home.
 4. If the device refuses to update the original v0.1.4 package because its signature changed, back up any needed local data, uninstall the old package, and install this one.
 
 Only the unmodified original USA game release is supported, matching the upstream v0.1.4 requirements. No game files or keys are included.
@@ -396,6 +400,8 @@ See `ARABIC_FIX_NOTES.md`, `BUILD-INFO.txt`, and `SHA256SUMS.txt` for details.
         "Original release ZIP SHA-256: $originalSha256",
         "Patched rtl_text.cpp SHA-256: $rtlSha256",
         "Patched rtl_text_test.cpp SHA-256: $rtlTestSha256",
+        "Patched surfaces.cpp SHA-256: $surfacesSha256",
+        "Patched rtl_text_hooks.cpp SHA-256: $rtlHooksSha256",
         "Original wwhd-uwp-game.exe SHA-256: $originalExeHash",
         "Rebuilt wwhd-uwp-game.exe SHA-256: $builtExeHash",
         "Signed APPX SHA-256: $appxHash",

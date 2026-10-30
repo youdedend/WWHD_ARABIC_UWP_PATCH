@@ -1,2 +1,4 @@
 patch/** text eol=lf
+patch/runtime/src/gfx/vulkan/surfaces.cpp -text
+patch/runtime/src/rtl_text_hooks.cpp -text
 ARABIC_FIX_NOTES.md text eol=lf

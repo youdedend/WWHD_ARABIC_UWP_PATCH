@@ -1,6 +1,9 @@
 name: Build Arabic UWP
 
 on:
+  push:
+    branches:
+      - arena/50e1336b-wwhd-arabic-uwp-patch
   workflow_dispatch:
     inputs:
       publish:
@@ -32,7 +35,7 @@ jobs:
           retention-days: 30
 
       - name: Publish GitHub release
-        if: success() && github.event_name == 'workflow_dispatch' && inputs.publish
+        if: success() && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish))
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
@@ -43,7 +46,7 @@ jobs:
           $notes = @"
           ## WWHD UWP 0.1.4 Arabic Fix
 
-          Newly compiled x64 UWP build based on [JYRS20/WWHD-UWP v0.1.4](https://github.com/JYRS20/WWHD-UWP/releases/tag/v0.1.4) and the supplied Arabic shaping fix.
+          Newly compiled x64 UWP build based on [JYRS20/WWHD-UWP v0.1.4](https://github.com/JYRS20/WWHD-UWP/releases/tag/v0.1.4) with the supplied Arabic text fixes and diagnostics.
 
           The ZIP contains the signed APPX, its new self-signed certificate, the VCLibs dependency, installation notes, build provenance, and checksums.
 
@@ -59,7 +62,7 @@ jobs:
           [View the build run]($env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID).
           "@
           [IO.File]::WriteAllText("$PWD/dist/RELEASE_NOTES.md", $notes)
-          gh release create 'v0.1.4-arabic-fix.1' $zip.FullName --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_REF_NAME --title 'WWHD UWP 0.1.4 Arabic Fix' --notes-file 'dist/RELEASE_NOTES.md' --latest
+          gh release create 'v0.1.4-arabic-fix.2' $zip.FullName --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_REF_NAME --title 'WWHD UWP 0.1.4 Arabic Text Fix 2' --notes-file 'dist/RELEASE_NOTES.md' --latest
           if ($LASTEXITCODE -ne 0) { throw 'GitHub release creation failed' }
 
       - name: Save failure report to this branch

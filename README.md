@@ -14,6 +14,8 @@ See the [release page](https://github.com/youdedend/WWHD_ARABIC_UWP_PATCH/releas
 
 - `patch/runtime/src/rtl_text.cpp`: expanded Arabic Presentation Forms-A joining mappings.
 - `patch/runtime/tools/rtl_text_test.cpp`: regression coverage for the new mappings and joined peh shaping.
+- `patch/runtime/src/gfx/vulkan/surfaces.cpp`: best-effort BC1/BC4 font-sheet decoding and `[diag sheet]` logging.
+- `patch/runtime/src/rtl_text_hooks.cpp`: `[diag rtl]` input/output logging for Arabic text diagnosis.
 - `ARABIC_FIX_NOTES.md`: notes and font/in-game validation limitations supplied with the fix.
 
 The source build combines [ZeldaWWHDRecomp commit `f10b56621ed13e0053e7cf8190e740834377e45a`](https://github.com/ZeldaWWHDRecomp/ZeldaWWHDRecomp/commit/f10b56621ed13e0053e7cf8190e740834377e45a) with the `v0.1.4` UWP source overlay, then applies these patch files. No game images, keys, saves, or generated game code are included.
@@ -31,7 +33,7 @@ The script:
 1. Downloads and checksum-verifies the original `v0.1.4` release and pinned public source dependencies.
 2. Applies the Arabic source patch and runs its RTL regression test.
 3. Compiles a new `wwhd-uwp-game.exe` with Clang for WindowsStore/UWP. Unchanged runtime DLLs and assets are retained from the verified original APPX; import libraries are generated from their exports.
-4. Updates the APPX version to `0.1.4.1`, repacks it with MakeAppx, signs it with a new self-signed certificate, and verifies the signature with SignTool.
+4. Updates the APPX version to `0.1.4.2`, repacks it with MakeAppx, signs it with a new self-signed certificate, and verifies the signature with SignTool.
 5. Produces `dist/wwhd-uwp-0.1.4-arabic-fix-x64.zip`, including the APPX, certificate, VCLibs dependency, installation notes, provenance, and SHA-256 checksums.
 
 The GitHub Actions workflow runs the same script on `windows-latest`. A manually dispatched run with **publish** enabled also creates the public release.
