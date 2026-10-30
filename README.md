@@ -1,14 +1,14 @@
 # WWHD Arabic UWP Patch
 
-This repository applies the supplied Arabic-script joining fix to [JYRS20/WWHD-UWP `v0.1.4`](https://github.com/JYRS20/WWHD-UWP/releases/tag/v0.1.4) and builds a downloadable, signed x64 UWP package.
+This repository applies the supplied Arabic text fixes and diagnostics to [JYRS20/WWHD-UWP `v0.1.4`](https://github.com/JYRS20/WWHD-UWP/releases/tag/v0.1.4) and builds a downloadable, signed x64 UWP package.
 
 ## Download
 
-[Download `wwhd-uwp-0.1.4-arabic-fix-x64.zip`](https://github.com/youdedend/WWHD_ARABIC_UWP_PATCH/releases/download/v0.1.4-arabic-fix.1/wwhd-uwp-0.1.4-arabic-fix-x64.zip) (43,307,980 bytes).
+[Download `wwhd-uwp-0.1.4-arabic-fix-x64.zip`](https://github.com/youdedend/WWHD_ARABIC_UWP_PATCH/releases/download/v0.1.4-arabic-fix.2/wwhd-uwp-0.1.4-arabic-fix-x64.zip) (43,308,689 bytes).
 
-SHA-256: `1b3683c0b745fbd6bdd705df2f5b97e09c063f8943d14796ed83251894de6ab6`
+SHA-256: `74892b879ab851bfda54b19365dae8c7338de779cc09fb5b38079eaeeb08ad79`
 
-See the [release page](https://github.com/youdedend/WWHD_ARABIC_UWP_PATCH/releases/tag/v0.1.4-arabic-fix.1) and the [successful build run](https://github.com/youdedend/WWHD_ARABIC_UWP_PATCH/actions/runs/40950164696).
+See the [release page](https://github.com/youdedend/WWHD_ARABIC_UWP_PATCH/releases/tag/v0.1.4-arabic-fix.2) and the [successful build run](https://github.com/youdedend/WWHD_ARABIC_UWP_PATCH/actions/runs/41019286325).
 
 ## Patch contents
 
